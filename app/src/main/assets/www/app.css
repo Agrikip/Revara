@@ -132,3 +132,42 @@ mark{background:var(--hl);color:var(--hl-ink);padding:0 2px;border-radius:2px}
 #toast[hidden]{display:none}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 .btn:disabled,.go:disabled{opacity:.42;cursor:default;box-shadow:none}
+
+/* ---- 3.1 (Nov 2026): touch targets, press feedback, motion, paper grain ---- */
+:root{--rose:#BF3358;--in:cubic-bezier(.4,0,1,1);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .2 0 0 0 0 .38 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* Paper grain, so the page reads as paper instead of a flat fill. */
+body,.top{background-image:var(--grain)}
+/* The tab row is hidden on Settings; display:flex was overriding [hidden]. */
+.tabs[hidden]{display:none}
+/* Every control is at least 44px tall. */
+.logo{display:inline-block;line-height:44px}
+.tabs a{display:flex;align-items:center;min-height:44px}
+.tabs a[aria-current="page"]{min-height:48px}
+.chip,.focus,.btn.small{min-height:44px}
+.focus{padding:6px 14px}
+.srow input,.srow select{min-height:44px}
+/* Press feedback. */
+.btn,.chip,.unit,.go,.focus,.opts button,.grades button{transition:transform .12s var(--out),background .2s,color .2s,border-color .2s}
+.btn:active,.chip:active,.unit:active,.go:active,.focus:active,.opts button:active,.grades button:active{transform:scale(.97)}
+/* Numbers that change keep their width. */
+.stats b,.go small,.unit small,.grades small,input[type=number],input[type=time]{font-variant-numeric:tabular-nums}
+/* List rows arrive one after another. */
+.list>*{animation:view .3s var(--out) both}
+.list>:nth-child(2){animation-delay:30ms}.list>:nth-child(3){animation-delay:60ms}.list>:nth-child(4){animation-delay:90ms}
+.list>:nth-child(5){animation-delay:120ms}.list>:nth-child(6){animation-delay:150ms}.list>:nth-child(n+7){animation-delay:180ms}
+/* Toast enters; the sheet leaves a little faster than it arrives. */
+#toast{animation:rise .22s var(--out)}
+.sheet.out{animation:fadeout .2s var(--in) forwards}
+.sheet.out>div{animation:drop .2s var(--in) forwards}
+@keyframes fadeout{to{opacity:0}}@keyframes drop{to{transform:translateY(24px);opacity:0}}
+/* A right answer gets a small pulse. */
+.opts button.right{animation:pulse .36s var(--out)}
+@keyframes pulse{50%{transform:scale(1.02)}}
+/* Waiting for the AI. */
+.thinking{display:grid;gap:10px}
+.thinking i{display:block;height:12px;border-radius:6px;background:linear-gradient(90deg,var(--soft) 25%,var(--line) 45%,var(--soft) 65%) 0 0/300% 100%;animation:shimmer 1.2s linear infinite}
+.thinking i:nth-of-type(2){width:86%}.thinking i:nth-of-type(3){width:58%}
+@keyframes shimmer{to{background-position:-150% 0}}
+.prose{display:grid;gap:10px;font-size:.9375rem}
+.btn.small{min-width:44px}

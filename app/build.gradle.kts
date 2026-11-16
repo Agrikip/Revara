@@ -11,8 +11,8 @@ android {
         applicationId = "com.revara.app"
         minSdk = 24
         targetSdk = 34
-        versionCode = 24
-        versionName = "2.0.4"
+        versionCode = 25
+        versionName = "2.1.0"
     }
     signingConfigs {
         // Fixed key kept in the repo so every GitHub build can update the previous one.
