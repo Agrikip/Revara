@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.RecallNotes" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">#FFFBF8F3</item>
+        <item name="android:statusBarColor">#FFFBF8F3</item>
+        <item name="android:navigationBarColor">#FFFBF8F3</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>
